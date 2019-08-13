@@ -1,0 +1,20 @@
+<h1>Here's a Post</h1>
+
+<ul>
+  <% @post.top_level_comments.each do |top_level_comment| %>
+    <li><%= top_level_comment.content %></li>
+      <a href="<%= comment_url(top_level_comment) %>">Reply</a>
+        <%  %>
+      <%#= render "child_comments", top_level_comment: top_level_comment %>
+
+  <% end %>
+</ul>
+
+<form action="<%=comments_url%>" method="post">
+  <%= auth_token %>
+  <label>Comment
+    <textarea name="comment[content]" cols="30" rows="10"></textarea>
+  </label>  <input type="hidden" name="comment[post_id]" value="<%=@post.id%>">
+
+  <input type="submit" value="Add Comment">
+</form>
